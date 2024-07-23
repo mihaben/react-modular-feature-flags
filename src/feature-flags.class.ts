@@ -10,15 +10,11 @@ export class FeatureFlags {
   private observers: Observer[];
   private channelsFlags: ChannelFlags;
   private flags: Flags;
-  private channels: {
-    [key: string]: FeatureFlagsChannel;
-  };
 
   constructor() {
     this.observers = [];
     this.channelsFlags = {};
     this.flags = {};
-    this.channels = {};
   }
 
   init(options: FeatureFlagsOptions) {
@@ -35,18 +31,16 @@ export class FeatureFlags {
   ) => {
     const key = uuidv4();
 
-    this.channels[key] = channelInstance;
-
     this.initChannelFlags(key, priority);
 
     channelInstance.onUpdate((flags: Flags) => {
-      this.updateFlags(key, flags);
+      this.updateChannelFlags(key, flags);
     });
 
     channelInstance.init();
 
     const flags = await channelInstance.getFlags();
-    this.updateFlags(key, flags);
+    this.updateChannelFlags(key, flags);
   };
 
   subscribe(obs: Observer) {
@@ -68,8 +62,9 @@ export class FeatureFlags {
   }
 
   private setDefaultFlags(flags: Flags) {
-    this.initChannelFlags("DEFAULT", 0);
-    this.updateFlags("DEFAULT", flags);
+    const key = "default";
+    this.initChannelFlags(key, 0);
+    this.updateChannelFlags(key, flags);
   }
 
   private initChannelFlags(key: string, priority: number) {
@@ -84,7 +79,7 @@ export class FeatureFlags {
     this.channelsFlags[key].flags = flags;
   }
 
-  private updateFlags(key: string, flags: Flags) {
+  private updateChannelFlags(key: string, flags: Flags) {
     this.setChannelFlag(key, flags);
     const newFlags = resolveFlags(this.channelsFlags);
 
