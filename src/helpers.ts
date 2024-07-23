@@ -1,15 +1,14 @@
-import { Flags, Source, SourcesFlags } from "./types";
+import { Flags, ChannelFlags } from "./types";
 
-export const resolveFlags = (
-  sourceFlags: SourcesFlags,
-  priorityOrder: Source[]
-): Flags => {
-  return priorityOrder.reduce((acc: Flags, current: Source) => {
-    return {
-      ...sourceFlags[current],
-      ...acc,
-    };
-  }, {});
+export const resolveFlags = (channelFlags: ChannelFlags): Flags => {
+  return Object.values(channelFlags)
+    .sort((a, b) => a.priority - b.priority)
+    .reduce((acc: Flags, { flags }) => {
+      return {
+        ...flags,
+        ...acc,
+      };
+    }, {});
 };
 
 export const flagsAreEqual = (flags1: Flags, flags2: Flags) => {

@@ -1,11 +1,11 @@
 import BaseChannel from "./base-channel.class";
 
 import { ffStrToObj } from "../helpers";
-import { FeatureFlagsSource, Flags } from "../types";
+import { FeatureFlagsChannel, Flags } from "../types";
 
-export default class CookiesSource
+export default class CookiesChannel
   extends BaseChannel
-  implements FeatureFlagsSource
+  implements FeatureFlagsChannel
 {
   root: Window;
   key: string;

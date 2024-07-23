@@ -1,70 +1,52 @@
 import { resolveFlags, flagsAreEqual } from "./helpers";
-import {
-  Source,
-  Flags,
-  FeatureFlagsSource,
-  SourcesFlags,
-  Observer,
-} from "./types";
+import { Flags, FeatureFlagsChannel, ChannelFlags, Observer } from "./types";
+import { v4 as uuidv4 } from "uuid";
 
 interface FeatureFlagsOptions {
   defaultFeatureFlags?: Flags;
-  priorityOrder?: Source[];
-  debug?: boolean;
 }
 
 export class FeatureFlags {
-  private priorityOrder: Source[];
-  private debug: boolean;
   private observers: Observer[];
-  private sourcesFlags: SourcesFlags;
+  private channelsFlags: ChannelFlags;
   private flags: Flags;
-  private sources: {
-    [key: string]: FeatureFlagsSource;
+  private channels: {
+    [key: string]: FeatureFlagsChannel;
   };
 
   constructor() {
-    // From high to low priority
-    this.priorityOrder = [
-      "QUERY_PARAMS",
-      "COOKIES",
-      "CUSTOM_EVENT",
-      "REMOTE_FLAGGER",
-      "DEFAULT",
-    ];
-    this.debug = false;
     this.observers = [];
-    this.sourcesFlags = {};
+    this.channelsFlags = {};
     this.flags = {};
-
-    this.sources = {};
+    this.channels = {};
   }
 
   init(options: FeatureFlagsOptions) {
-    const { defaultFeatureFlags, priorityOrder, debug } = options;
-
-    this.priorityOrder = priorityOrder || this.priorityOrder;
-    this.debug = debug || this.debug;
+    const { defaultFeatureFlags } = options;
 
     if (defaultFeatureFlags) {
       this.setDefaultFlags(defaultFeatureFlags);
     }
   }
 
-  initSource = async (
-    sourceType: Source,
-    sourceInstance: FeatureFlagsSource
+  initChannel = async (
+    { priority }: { priority: number },
+    channelInstance: FeatureFlagsChannel
   ) => {
-    this.sources[sourceType] = sourceInstance;
+    const key = uuidv4();
 
-    sourceInstance.onUpdate((flags: Flags) => {
-      this.updateFlags(sourceType, flags);
+    this.channels[key] = channelInstance;
+
+    this.initChannelFlags(key, priority);
+
+    channelInstance.onUpdate((flags: Flags) => {
+      this.updateFlags(key, flags);
     });
 
-    sourceInstance.init();
+    channelInstance.init();
 
-    const sourceFlags = await sourceInstance.getFlags();
-    this.updateFlags(sourceType, sourceFlags);
+    const flags = await channelInstance.getFlags();
+    this.updateFlags(key, flags);
   };
 
   subscribe(obs: Observer) {
@@ -86,16 +68,25 @@ export class FeatureFlags {
   }
 
   private setDefaultFlags(flags: Flags) {
+    this.initChannelFlags("DEFAULT", 0);
     this.updateFlags("DEFAULT", flags);
   }
 
-  private setSourceFlag(sourceType: Source, flags: Flags) {
-    this.sourcesFlags[sourceType] = flags;
+  private initChannelFlags(key: string, priority: number) {
+    this.channelsFlags[key] = {
+      flags: {},
+      priority,
+    };
   }
 
-  private updateFlags(sourceType: Source, flags: Flags) {
-    this.setSourceFlag(sourceType, flags);
-    const newFlags = resolveFlags(this.sourcesFlags, this.priorityOrder);
+  private setChannelFlag(key: string, flags: Flags) {
+    if (!this.channelsFlags[key]) return;
+    this.channelsFlags[key].flags = flags;
+  }
+
+  private updateFlags(key: string, flags: Flags) {
+    this.setChannelFlag(key, flags);
+    const newFlags = resolveFlags(this.channelsFlags);
 
     if (!flagsAreEqual(this.flags, newFlags)) {
       this.flags = newFlags;
