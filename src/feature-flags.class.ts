@@ -67,10 +67,6 @@ export class FeatureFlags {
     this.updateFlags(sourceType, sourceFlags);
   };
 
-  getSource(sourceType: Source) {
-    return this.sources[sourceType];
-  }
-
   subscribe(obs: Observer) {
     if (typeof obs === "function") {
       this.observers.push(obs);
