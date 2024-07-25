@@ -5,8 +5,8 @@ export const resolveFlags = (channelFlags: ChannelFlags): Flags => {
     .sort((a, b) => a.priority - b.priority)
     .reduce((acc: Flags, { flags }) => {
       return {
-        ...flags,
         ...acc,
+        ...flags,
       };
     }, {});
 };
