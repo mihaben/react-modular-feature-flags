@@ -1,17 +1,43 @@
-import featureFlags, { useFeatureFlag } from "../../dist";
+import featureFlags, { CookiesChannel, useFeatureFlag } from "../../dist";
 
+enum Flags {
+  default = "default",
+  foo = "foo",
+  bar = "bar",
+  baz = "baz",
+}
+
+// Initialize the feature flags
 featureFlags.init({
-  defaultFeatureFlags: { test: true },
+  defaultFeatureFlags: { [Flags.default]: true },
 });
 
+// Initialize the cookies channel
+featureFlags.initChannel({ priority: 1 }, new CookiesChannel(window));
+
 function App() {
-  const test = useFeatureFlag("test");
   return (
     <div>
+      <h1>Feature Flags</h1>
       <pre>
-        <b>flag "test":</b> {test.toString()}
+        <ul>
+          <ItemFlag flagKey={Flags.default} />
+          <ItemFlag flagKey={Flags.foo} />
+          <ItemFlag flagKey={Flags.bar} />
+          <ItemFlag flagKey={Flags.baz} />
+        </ul>
       </pre>
     </div>
+  );
+}
+
+function ItemFlag({ flagKey }: { flagKey: string }) {
+  const flagValue = useFeatureFlag(flagKey);
+
+  return (
+    <li>
+      Flag <b>{flagKey}</b>: {flagValue?.toString()}
+    </li>
   );
 }
 
