@@ -3,6 +3,11 @@ import BaseChannel from "./base-channel.class";
 import { ffStrToObj } from "../helpers";
 import { FeatureFlagsChannel, Flags } from "../types";
 
+interface CookiesChannelProps {
+  root?: Window;
+  key?: string;
+}
+
 export default class CookiesChannel
   extends BaseChannel
   implements FeatureFlagsChannel
@@ -11,10 +16,10 @@ export default class CookiesChannel
   key: string;
   flags: Flags;
 
-  constructor(root: Window, key = "featureFlags") {
+  constructor(props?: CookiesChannelProps) {
     super();
-    this.root = root;
-    this.key = key;
+    this.root = props?.root || window;
+    this.key = props?.key || "featureFlags";
     this.flags = {};
   }
 
