@@ -13,7 +13,7 @@ featureFlags.init({
 });
 
 // Initialize the cookies channel
-featureFlags.initChannel({ priority: 1 }, new CookiesChannel(window));
+featureFlags.initChannel({ priority: 1 }, new CookiesChannel());
 
 function App() {
   return (
