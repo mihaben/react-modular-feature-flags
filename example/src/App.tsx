@@ -36,7 +36,7 @@ function App() {
           <Logo />
         </h1>
       </div>
-
+      <Alert />
       <div className="relative overflow-x-auto">
         <table className="w-full text-sm text-left rtl:text-right text-gray-500 ">
           <thead className="text-xs text-gray-700 uppercase bg-gray-50">
@@ -89,6 +89,33 @@ function BadgeInactive() {
     <span className="bg-red-100 text-red-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded">
       Inactive
     </span>
+  );
+}
+
+function Alert() {
+  return (
+    <div
+      className="flex items-center p-4 mb-4 text-sm text-sky-800 rounded-lg bg-sky-50"
+      role="alert"
+    >
+      <svg
+        className="flex-shrink-0 inline w-4 h-4 me-3"
+        aria-hidden="true"
+        xmlns="http://www.w3.org/2000/svg"
+        fill="currentColor"
+        viewBox="0 0 20 20"
+      >
+        <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z" />
+      </svg>
+      <span className="sr-only">Info</span>
+      <div>
+        Access the{" "}
+        <a href="#as" className="underline underline-offset-4">
+          documentation
+        </a>{" "}
+        to learn how to enable and disable feature flags.
+      </div>
+    </div>
   );
 }
 
