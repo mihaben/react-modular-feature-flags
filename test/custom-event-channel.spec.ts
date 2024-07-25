@@ -1,8 +1,11 @@
-import featureFlags from "../src/feature-flags.class";
+import { FeatureFlags } from "../src/feature-flags.class";
 import CustomEventChannel from "../src/channels/custom-event-channel.class";
 
 describe("Custom event channel", () => {
-  const flafKey = "flagA";
+  const featureFlags = new FeatureFlags();
+  featureFlags.init({});
+
+  const flafKey = "flag-custom-event";
   const eventName = "custom-event";
 
   const eventListeners = {} as EventListener;
