@@ -1,4 +1,9 @@
-import featureFlags, { CookiesChannel, useFeatureFlag } from "../../dist";
+import featureFlags, {
+  CookiesChannel,
+  QueryParamsClientChannel,
+  CustomEventChannel,
+  useFeatureFlag,
+} from "../../dist";
 
 enum Flags {
   default = "default",
@@ -14,6 +19,12 @@ featureFlags.init({
 
 // Initialize the cookies channel
 featureFlags.initChannel({ priority: 1 }, new CookiesChannel());
+
+// Initialize the query params client channel
+featureFlags.initChannel({ priority: 2 }, new QueryParamsClientChannel());
+
+// Initialize the custom event channel
+featureFlags.initChannel({ priority: 3 }, new CustomEventChannel());
 
 function App() {
   return (
