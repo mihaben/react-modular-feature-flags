@@ -5,7 +5,7 @@ describe("Custom event channel", () => {
   const featureFlags = new FeatureFlags();
   featureFlags.init({});
 
-  const flafKey = "flag-custom-event";
+  const flagKey = "flag-custom-event";
   const eventName = "custom-event";
 
   const eventListeners = {} as EventListener;
@@ -24,11 +24,11 @@ describe("Custom event channel", () => {
   featureFlags.initChannel({ priority: 0 }, customEventChannel);
 
   it("flag should be false by default", () => {
-    expect(featureFlags.getFlag(flafKey)).toBeFalsy();
+    expect(featureFlags.getFlag(flagKey)).toBeFalsy();
   });
 
   it("flag should be true after the event is dispatched", () => {
-    eventListeners[eventName]({ detail: { [flafKey]: true } });
-    expect(featureFlags.getFlag(flafKey)).toBeTruthy();
+    eventListeners[eventName]({ detail: { [flagKey]: true } });
+    expect(featureFlags.getFlag(flagKey)).toBeTruthy();
   });
 });
