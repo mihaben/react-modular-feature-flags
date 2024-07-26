@@ -6,6 +6,7 @@ import featureFlags, {
 } from "../../dist";
 
 import Logo from "./assets/logo.svg?react";
+import MyCustomChannel from "./my-custom-channel.class";
 
 enum Flags {
   default = "default",
@@ -27,6 +28,12 @@ featureFlags.initChannel({ priority: 2 }, new QueryParamsClientChannel());
 
 // Initialize the custom event channel
 featureFlags.initChannel({ priority: 3 }, new CustomEventChannel());
+
+// Initialize custom channel
+featureFlags.initChannel(
+  { priority: 4 },
+  new MyCustomChannel({ key: Flags.baz, delay: 2000 })
+);
 
 function App() {
   return (
