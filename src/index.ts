@@ -2,6 +2,9 @@ import featureFlags from "./feature-flags.class";
 
 export default featureFlags;
 
+// Types
+export type { Flags, FeatureFlagsChannel } from "./types";
+
 // Channels
 export { default as BaseChannel } from "./channels/base-channel.class";
 export { default as CookiesChannel } from "./channels/cookies-channel.class";
