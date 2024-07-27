@@ -1,8 +1,14 @@
 # react-modular-feature-flags
 
-![react-modular-feature-flags logo](./public/react-modular-feature-flags-logo.svg)
+<div align="center">
+    <picture>
+        <img alt="react-modular-feature-flags" width="480px" src="public/react-modular-feature-flags-logo.svg" />
+    </picture>
 
-> `react-modular-feature-flags` is a TypeScript-based singleton library for managing feature flags in React, supporting multiple activation channels and custom hooks for real-time access.
+    <p align="center">Modular feature flags management for modern React apps</p>
+
+</div>
+<br>
 
 ## Table of contents
 
@@ -77,14 +83,16 @@ const flagValue = useFeatureFlag("foo");
 
 ### Methods
 
-| Prop          | Type                                                 | Description                                    |
-| ------------- | ---------------------------------------------------- | ---------------------------------------------- |
-| `init`        | `({defaultProps?: Record<string, boolean>}) => void` | Initializes the library                        |
-| `initChannel` | `({priority: number}, Channel) => void`              | Initializes a channel with a specific priority |
-| `getFlags`    | `() => Record<string, boolean>`                      | Returns the value of all computed flags        |
-| `getFlag`     | `(flag:String) => boolean`                           | Returns the value of a specific flag           |
+| Prop          | Type                                                 | Description                                                                                  |
+| ------------- | ---------------------------------------------------- | -------------------------------------------------------------------------------------------- |
+| `init`        | `({defaultProps?: Record<string, boolean>}) => void` | Initializes the library                                                                      |
+| `initChannel` | `({priority: number}, Channel) => void`              | Initializes a channel with a specific priority. Higher priorities overwrite lower priorities |
+| `getFlags`    | `() => Record<string, boolean>`                      | Returns the value of all computed flags                                                      |
+| `getFlag`     | `(flag:String) => boolean`                           | Returns the value of a specific flag                                                         |
 
 ## Channels
+
+> A channel is a mechanism through which feature flags can be activated or deactivated. Each channel listens to specific sources and communicates the state of these flags to the library. Channels allow for dynamic and flexible control over feature flags, ensuring that the application's features can be toggled based on various contexts and conditions.
 
 ### Cookies
 
@@ -154,7 +162,7 @@ window.dispatchEvent(
 ### Configcat
 
 > [!NOTE]  
-> The ConfigCat channel integrates with the ConfigCat service to manage feature flags remotely. This channel allows you to update feature flags in real-time from a centralized dashboard, offering a powerful way to control feature rollout across different environments and user segments.
+> The ConfigCat channel integrates with the [ConfigCat service](https://configcat.com/) to manage feature flags remotely. This channel allows you to update feature flags in real-time from a centralized dashboard, offering a powerful way to control feature rollout across different environments and user segments.
 
 | Prop        | Type        | Required | Default value | Description       |
 | ----------- | ----------- | -------- | ------------- | ----------------- |
