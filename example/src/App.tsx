@@ -3,7 +3,7 @@ import featureFlags, {
   QueryParamsClientChannel,
   CustomEventChannel,
   useFeatureFlag,
-} from "../../dist";
+} from "react-modular-feature-flags";
 
 import Logo from "./assets/logo.svg?react";
 import MyCustomChannel from "./my-custom-channel.class";
