@@ -1,5 +1,9 @@
 # react-modular-feature-flags
 
+![react-modular-feature-flags logo](./public/react-modular-feature-flags-logo.svg)
+
+> `react-modular-feature-flags` is a TypeScript-based singleton library for managing feature flags in React, supporting multiple activation channels and custom hooks for real-time access.
+
 ## Table of contents
 
 - [About](#about)
@@ -24,6 +28,8 @@ Key features include:
 - **Custom Channels:** Create and integrate your custom channels to manage feature flags as per your unique requirements.
 - **Real-Time Access:** Access the current state of any feature flag at any moment using our hook `useFeatureFlag`.
 - **TypeScript Support:** Fully typed with TypeScript for enhanced developer experience and code safety.
+
+![Diagram](./public/react-modular-feature-flags%20diagram.svg)
 
 > [!TIP]  
 > You can see our sample project [here]("/example").
