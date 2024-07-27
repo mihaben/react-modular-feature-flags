@@ -3,7 +3,7 @@
 <br>
 <div align="center">
     <picture>
-        <img alt="react-modular-feature-flags" width="480px" src="public/react-modular-feature-flags-logo.svg" />
+        <img alt="react-modular-feature-flags" width="480px" src="./public/react-modular-feature-flags-logo.svg" />
     </picture>
     <p align="center">Modular feature flags management for modern React apps</p>
 
