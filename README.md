@@ -9,6 +9,11 @@
 
 </div>
 <br>
+<div align="center">
+
+[![NPM version](https://badge.fury.io/js/react-modular-feature-flags.svg)](http://badge.fury.io/js/react-modular-feature-flags)
+
+</div>
 
 ## Table of contents
 
