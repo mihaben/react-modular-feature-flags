@@ -60,12 +60,12 @@ featureFlags.init({
 
 Next you must add the different channels you want to support. You can add as many channels as you need.
 
-> [!TIP]
-> Learn more about the [available channels](#channels) or how to [create your own custom channel](#custom-channel).
-
 ```js
 featureFlags.initChannel({ priority: 1 }, new MyChannel());
 ```
+
+> [!TIP]
+> Learn more about the [available channels](#channels) or how to [create your own custom channel](#custom-channel).
 
 Finally, you can access the value of the feature flag within your components using the following `hook`:
 
