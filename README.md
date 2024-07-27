@@ -187,6 +187,12 @@ window.dispatchEvent(
 ```ts
 // my-custom-channel.class.ts
 
+import {
+  BaseChannel,
+  FeatureFlagsChannel,
+  Flags,
+} from "react-modular-feature-flags";
+
 interface MyCustomChannelProps {
   key: string;
   delay: number;

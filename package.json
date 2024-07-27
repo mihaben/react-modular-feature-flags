@@ -43,8 +43,10 @@
   "license": "MIT",
   "author": {
     "name": "mihaben",
-    "email": "mihaben89@gmail.com"
+    "email": "mihaben89@gmail.com",
+    "url": "https://github.com/mihaben/"
   },
+  "description": "Modular feature flags management for modern React apps",
   "keywords": [
     "react",
     "feature-flags",
@@ -54,5 +56,6 @@
     "toggle",
     "modular",
     "configcat"
-  ]
+  ],
+  "homepage": "https://github.com/mihaben/react-modular-feature-flags#readme"
 }
