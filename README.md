@@ -32,7 +32,7 @@ Key features include:
 ![Diagram](./public/react-modular-feature-flags%20diagram.svg)
 
 > [!TIP]  
-> You can see our sample project [here]("/example").
+> You can see our sample project [here](/example/src/App.tsx).
 
 ## Installation
 
@@ -60,7 +60,8 @@ featureFlags.init({
 
 Next you must add the different channels you want to support. You can add as many channels as you need.
 
-Learn more about the [available channels](#channels) or how to [create your own custom channel](#custom-channel).
+> [!TIP]
+> Learn more about the [available channels](#channels) or how to [create your own custom channel](#custom-channel).
 
 ```js
 featureFlags.initChannel({ priority: 1 }, new MyChannel());
@@ -96,6 +97,8 @@ const flagValue = useFeatureFlag("foo");
 document.cookie = "featureFlags=bar,foo=false,baz";
 ```
 
+**API**
+
 | Prop   | Type     | Required | Default value  | Description                |
 | ------ | -------- | -------- | -------------- | -------------------------- |
 | `key`  | `string` | `false`  | `featureFlags` | Sets the key of the cookie |
@@ -111,6 +114,8 @@ document.cookie = "featureFlags=bar,foo=false,baz";
 ```
 my-website.com?featureFlags=bar,foo=false,baz
 ```
+
+**API**
 
 | Prop   | Type     | Required | Default value  | Description                     |
 | ------ | -------- | -------- | -------------- | ------------------------------- |
@@ -131,6 +136,8 @@ window.dispatchEvent(
   })
 );
 ```
+
+**API**
 
 | Prop      | Type           | Required | Default value | Description                   |
 | --------- | -------------- | -------- | ------------- | ----------------------------- |
