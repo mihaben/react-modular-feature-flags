@@ -12,6 +12,7 @@
   "dependencies": {
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
+    "react-modular-feature-flags": "^1.0.0",
     "vite-plugin-svgr": "^4.2.0"
   },
   "devDependencies": {

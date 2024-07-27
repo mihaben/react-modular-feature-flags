@@ -1,4 +1,8 @@
-import { BaseChannel, FeatureFlagsChannel, Flags } from "../../dist";
+import {
+  BaseChannel,
+  FeatureFlagsChannel,
+  Flags,
+} from "react-modular-feature-flags";
 
 interface MyCustomChannelProps {
   key: string;
