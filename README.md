@@ -90,6 +90,12 @@ const flagValue = useFeatureFlag("foo");
 > [!NOTE]  
 > The Cookies channel leverages browser cookies to store and retrieve feature flag states. This is particularly useful for maintaining feature state across different sessions and ensuring a consistent user experience.
 
+**How to trigger?**
+
+```js
+document.cookie = "featureFlags=bar,foo=false,baz";
+```
+
 | Prop   | Type     | Required | Default value  | Description                |
 | ------ | -------- | -------- | -------------- | -------------------------- |
 | `key`  | `string` | `false`  | `featureFlags` | Sets the key of the cookie |
@@ -100,6 +106,12 @@ const flagValue = useFeatureFlag("foo");
 > [!NOTE]  
 > The Query Params channel enables you to control feature flags through URL parameters. By appending specific parameters to the URL, you can easily toggle features for debugging or testing purposes without altering the codebase.
 
+**How to trigger?**
+
+```
+my-website.com?featureFlags=bar,foo=false,baz
+```
+
 | Prop   | Type     | Required | Default value  | Description                     |
 | ------ | -------- | -------- | -------------- | ------------------------------- |
 | `key`  | `string` | `false`  | `featureFlags` | Sets the key of the query param |
@@ -109,6 +121,16 @@ const flagValue = useFeatureFlag("foo");
 
 > [!NOTE]  
 > The Custom Events channel allows feature flags to be controlled via events dispatched within your application. This provides a dynamic way to manage feature states based on user interactions or other custom triggers.
+
+**How to trigger?**
+
+```js
+window.dispatchEvent(
+  new CustomEvent("flags:update", {
+    detail: { bar: true, baz: true, foo: false },
+  })
+);
+```
 
 | Prop      | Type           | Required | Default value | Description                   |
 | --------- | -------------- | -------- | ------------- | ----------------------------- |
